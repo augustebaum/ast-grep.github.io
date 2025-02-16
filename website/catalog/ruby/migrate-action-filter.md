@@ -54,15 +54,15 @@ end
 <!-- use # [!code --] and # [!code ++] to annotate diff -->
 ```rb
 class TodosController < ApplicationController
-  before_action :authenticate  # [!code --]
-  before_filter :authenticate # [!code ++]
-  around_action :wrap_in_transaction, only: :show # [!code --]
-  around_filter :wrap_in_transaction, only: :show # [!code ++]
-  after_action do |controller|  # [!code --]
-     flash[:error] = "You must be logged in" # [!code --]
+  before_filter :authenticate # [!code --]
+  before_action :authenticate  # [!code ++]
+  around_filter :wrap_in_transaction, only: :show # [!code --]
+  around_action :wrap_in_transaction, only: :show # [!code ++]
+  after_filter do |controller| # [!code --]
+    flash[:error] = "You must be logged in" # [!code --]
   end # [!code --]
-  after_filter do |controller| # [!code ++]
-    flash[:error] = "You must be logged in" # [!code ++]
+  after_action do |controller|  # [!code ++]
+     flash[:error] = "You must be logged in" # [!code ++]
   end # [!code ++]
 
   def index
